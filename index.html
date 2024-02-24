@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sherlock Holmes and the case of the leaflet map interactive scrolling web page</title>
+<link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAQAAAAIAAAADAAAAAwADAAQAAwAXFhUAAQABAAIAAQADAAEABAABAAIBAAAEAQMAAQACAAIAAgADAAIAAgEBAAMBAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAggBAAgICQcJCAgICgkIDAcGBwICAgIJCQgICAkIAw8HCAcDCAIIAQgICQIJAgIJCAIHCAIQAggCEAEICAIDAwEICAIBAAIJAgIDAwMICgkJAggJCAgICAkJAggQAwIJCAgCAgIJAgEIAgEBCQMICgEIAgICAggJBwECAg8IEAQCCAgHCQIIAgIIEAgDCAgJCAEBAAgCEQICAQECAgIJBwgBCAcBAQgCCAEABwECCQIIAggCCAgIAggCBwICCQcDAgMCCAIBAwICAQMJCQkJCgMHBwgCAgICAggLEAgIAggICA8IDQkODwgJAgkJDw8FCAgCEAgICAgIDggCCQ4PCQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" rel="icon" type="image/x-icon">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        overflow-y: scroll;
+        font-family:serif;
+    }
+    #map {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .leaflet-tile-pane {
+        -webkit-filter: grayscale(1) invert(1);
+        filter: grayscale(1) invert(1);
+    }
+    .leaflet-marker-icon {
+        filter: hue-rotate(150deg);
+    }
+    .asside {
+        color: #636363;
+        font-style: italic;
+        font-weight: bold;
+    }
+    .panel {
+        width: 80%;
+        max-width: 600px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        margin: 90vh auto 75vh auto;
+        transform: translateY(-50%);
+    }
+    .last-panel {
+        margin: 90vh auto 0 auto;
+    }
+    .first-panel {
+        margin: 0vh auto 75vh auto;
+    }
+    .panel h2 {
+        margin-top: 0;
+    }
+    h1 {
+        margin-top:0;
+    }
+    #panelpre {
+        width:100%;
+        height:90vh;
+    }
+</style>
+
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="panelpre"></div>
+
+<div class="panel first-panel" id="panel0">
+    <h1>Sherlock Holmes and the case of the leaflet map interactive scrolling web page</h1>
+    <p class="asside">I wanted to see how simple it could be to make an scrollytelling page with a leaflet map flying to different locations. I also wanted to make the leaflet map have a dark theme without paying for expensive tilesets. </p>
+    <p class="asside">I think this has worked out pretty well. It's just a simple greyscale and invert filter on the map with a hue-rotation on the marks to turn them from blue to red.</p>
+    <p class="asside">I remember seeing a scrolling map site doing Sherlock Holmes locations ages ago so I thought that would be more interesting than just lorum ipsuming the content so I got AI to come up with a list of locations and some words to go with each. So here we go...</p>
+    <p>Ladies and Gentlemen, esteemed readers, and fellow sleuths, prepare yourselves for an adventure through the fog-laden streets of London, tracing the illustrious steps of the world's greatest detective, Mr. Sherlock Holmes. Join me as we embark on a scroll-driven journey, uncovering the secrets and stories that lie within ten iconic locations featured in the tales penned by Sir Arthur Conan Doyle. So, don your deerstalker, grab your magnifying glass, and let the game be afoot!</p>
+</div>
+
+<div class="panel" id="panel1">
+    <h2>221B Baker Street, Marylebone, London NW1 6XE</h2>
+    <p>Our journey commences at the most famous address in detective history, the residence of Sherlock Holmes himself. While the actual number 221B was a work of fiction during Holmes's era, today the Sherlock Holmes Museum stands as a testament to the detective's legacy, complete with Victorian-era furnishings and Holmes's personal effects.</p>
+</div>
+
+<div class="panel" id="panel2">
+    <h2>Scotland Yard, Victoria Embankment, London SW1A 2JL</h2>
+    <p>No Holmesian tale is complete without a visit to Scotland Yard, where Holmes often collaborated with (and outwitted) the likes of Inspector Lestrade. The Metropolitan Police Service's headquarters has since moved, but the original site remains a symbol of law enforcement and detective work.</p>
+</div>
+
+<div class="panel" id="panel3">
+    <h2>The Diogenes Club, Pall Mall (fictional location)</h2>
+    <p>While the Diogenes Club is a product of Conan Doyle's imagination, it's said to be inspired by the private gentlemen's clubs of Pall Mall. One such establishment, the Reform Club at 104 Pall Mall, could serve as the perfect stand-in, with its strict rules of silence and exclusivity reminiscent of Mycroft Holmes's sanctuary.</p>
+</div>
+
+<div class="panel" id="panel4">
+    <h2>St Bartholomew's Hospital, West Smithfield, London EC1A 7BE</h2>
+    <p>St. Bart's is not only the oldest hospital in London but also the meeting place of Dr. John Watson and Sherlock Holmes. It's here, in the pathology department, that Watson first becomes intrigued by Holmes's unique methods and keen intellect, setting the stage for their legendary partnership.</p>
+</div>
+
+<div class="panel" id="panel5">
+    <h2>The Criterion Bar, 224 Piccadilly, London W1J 9HP</h2>
+    <p>Raise a glass at the very spot where Dr. Watson was introduced to Sherlock Holmes, as recounted in "A Study in Scarlet". The Criterion Bar, now known as The Criterion Restaurant, still stands as a grand and opulent venue, echoing with the whispers of their fateful encounter.</p>
+</div>
+
+<div class="panel" id="panel6">
+    <h2>Lyceum Theatre, 21 Wellington Street, London WC2E 7RQ</h2>
+    <p>In "The Sign of Four", Holmes and Watson attend a performance at the Lyceum Theatre, a location Conan Doyle himself frequented. The theatre's grand facade and rich history make it a must-visit for any fan seeking to immerse themselves in the Victorian era's dramatic flair.</p>
+</div>
+
+<div class="panel" id="panel7">
+    <h2>The Royal Opera House, Bow Street, London WC2E 9DD</h2>
+    <p>"The Adventure of the Illustrious Client" sees Holmes saving a young lady from a disastrous marriage at this very opera house. Today, visitors can enjoy world-class performances and perhaps ponder the intrigues that once unfolded within its walls.</p>
+</div>
+
+<div class="panel" id="panel8">
+    <h2>Camden House, Camden Hill Road (fictional location)</h2>
+    <p>While Camden House from "The Adventure of the Six Napoleons" doesn't exist, the affluent neighborhood of Kensington is a fitting backdrop. Wander the streets and imagine the shattered busts of Napoleon and the hidden pearl that once caused such a stir.</p>
+</div>
+
+<div class="panel" id="panel9">
+    <h2>Charing Cross Station, Strand, London WC2N 5HS</h2>
+    <p>Holmes and Watson often embarked on their adventures from this bustling railway station. Whether chasing down a lead or departing for the countryside, the echoes of their hurried footsteps seem to linger amidst the comings and goings of today's travelers.</p>
+</div>
+
+<div class="panel" id="panel10">
+    <h2>The Reichenbach Falls, Meiringen, Switzerland</h2>
+    <p>While not in London, no Holmesian journey is complete without acknowledging the site of Holmes's presumed demise at the hands of Professor Moriarty. Though a trip to Switzerland is a detour, the powerful falls are a pilgrimage site for fans, marking the detective's most dramatic and defining moment.</p>
+</div>
+
+<div class="panel last-panel" id="panel11">
+    <h2>Our journey ends</h2>
+    <p>As our journey through the London of Sherlock Holmes draws to a close, we find ourselves steeped in the history and mystery that Conan Doyle so masterfully wove into his stories. Each location, whether standing in reality or fiction, serves as a testament to the enduring legacy of Sherlock Holmes—a legacy that continues to captivate the minds and imaginations of readers and adventurers around the globe. So, until our next adventure, I bid you a fond farewell and remind you that the world is full of obvious things which nobody by any chance ever observes.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+<script>
+    // Initialize Leaflet map
+    var map = L.map('map', {
+        scrollWheelZoom: false, // Disable zooming on scroll wheel
+        dragging: false, // Disable dragging
+        maxBounds: [[-90, -180], [90, 180]] // Set maximum bounds to prevent panning outside the world
+    }).setView([51.505, -0.09], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Function to geocode address and set map view
+    function geocodeAndSetView(address, zoom) {
+        fetch('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(address) + '&format=json')
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    var result = data[0];
+                    map.flyTo([result.lat, result.lon], zoom, {
+                        animate: true,
+                        duration: 2
+                    });
+                    // Add markers
+                    var marker = L.marker([result.lat, result.lon]).addTo(map);
+                } else {
+                    console.error('Address not found:', address);
+                }
+            })
+            .catch(error => console.error('Error geocoding address:', error));
+    }
+
+    // Panels data
+    var panels = [
+        { id: 'panelpre', address: [51.505, -0.09], zoom: 5 },
+        { id: 'panel0', address: [51.505, -0.09], zoom: 13 },
+        { id: 'panel1', address: "221B Baker Street, Marylebone, London NW1 6XE", zoom: 18 },
+        { id: 'panel2', address: "Scotland Yard, Victoria Embankment, London SW1A 2JL", zoom: 17 },
+        { id: 'panel3', address: "Pall Mall, London SW1Y 5ED", zoom: 15 },
+        { id: 'panel4', address: "St Bartholomew's Hospital, West Smithfield, London EC1A 7BE", zoom: 15 },
+        { id: 'panel5', address: "224 Piccadilly, St. James's, London W1J 9HP", zoom: 15 },
+        { id: 'panel6', address: "Lyceum Theatre, 21 Wellington St, London WC2E 7RQ", zoom: 18 },
+        { id: 'panel7', address: "Royal Opera House, Bow St, London WC2E 9DD", zoom: 18 },
+        { id: 'panel8', address: "Kensington, London, UK", zoom: 15 },
+        { id: 'panel9', address: "Charing Cross Station, Strand, London WC2N 5HS", zoom: 18 },
+        { id: 'panel10', address: "Reichenbach Falls, Switzerland", zoom: 5 }
+    ];
+
+    // GSAP ScrollTrigger configuration
+    gsap.registerPlugin(ScrollTrigger);
+    panels.forEach(panel => {
+        ScrollTrigger.create({
+            trigger: '#' + panel.id,
+            start: 'top center',
+            end: 'bottom center',
+            onEnter: () => {
+                geocodeAndSetView(panel.address, panel.zoom);
+            },
+            onEnterBack: () => {
+                geocodeAndSetView(panel.address, panel.zoom);
+            }
+        });
+    });
+</script>
+</body>
+</html>
